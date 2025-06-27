@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Traffic Volume Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef;
+            padding: 20px;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            margin: auto;
+        }
+        h2 {
+            text-align: center;
+        }
+        input, select {
+            width: 100%;
+            margin: 8px 0;
+            padding: 8px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .result {
+            text-align: center;
+            margin-top: 20px;
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <form method="POST" action="/predict">
+        <h2>Traffic Volume Prediction</h2>
+        <label>Temperature (temp):</label>
+        <input type="number" name="temp" step="0.01" required>
+
+        <label>Rain (mm):</label>
+        <input type="number" name="rain" step="0.01" required>
+
+        <label>Snow (mm):</label>
+        <input type="number" name="snow" step="0.01" required>
+
+        <label>Weather:</label>
+        <select name="weather" required>
+            <option value="Clouds">Clouds</option>
+            <option value="Clear">Clear</option>
+            <option value="Rain">Rain</option>
+            <option value="Snow">Snow</option>
+            <option value="Mist">Mist</option>
+            <option value="Drizzle">Drizzle</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label>Holiday:</label>
+        <select name="holiday" required>
+            <option value="None">None</option>
+            <option value="Labor Day">Labor Day</option>
+            <option value="Thanksgiving Day">Thanksgiving Day</option>
+            <option value="Christmas Day">Christmas Day</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label>Date:</label>
+        <input type="date" name="date" required>
+
+        <label>Time:</label>
+        <input type="time" name="time" required>
+
+        <button type="submit">Predict</button>
+
+        {% if prediction_text %}
+        <div class="result">{{ prediction_text }}</div>
+        {% endif %}
+    </form>
+</body>
+</html>
